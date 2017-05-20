@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">MyFirstMarcos</string>
+    <string name="lista_vacia">Lista vacia</string>
+    <string name="label_nome_hipoteca">Nome hipoteca</string>
+    <string name="label_condicoes">Condicoes</string>
+    <string name="label_contato">Contato</string>
+    <string name="label_telefone">Telefone</string>
+    <string name="label_email">Email</string>
+    <string name="label_observacoes">Observacoes</string>
+    <string name="label_contrato">Contato</string>
+
+</resources>
