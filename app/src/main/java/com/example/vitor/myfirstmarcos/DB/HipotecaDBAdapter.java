@@ -46,7 +46,7 @@ public class HipotecaDBAdapter {
     }
 
     public void fechar() {
-        db.close();
+        hipotecaDBHelper.close();
     }
 
     public Cursor getCursor() throws SQLException{
