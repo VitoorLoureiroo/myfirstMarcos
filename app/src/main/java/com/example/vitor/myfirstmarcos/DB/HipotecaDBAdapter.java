@@ -20,6 +20,8 @@ public class HipotecaDBAdapter {
     public static final String C_COLUMNA_CONDICOES = "hip_condicoes";
     public static final String C_COLUMNA_CONTATO = "hip_contato";
     public static final String C_COLUMNA_EMAIL = "hip_email";
+    public static final String C_COLUMNA_OBSERVACOES = "hip_observacoes";
+    public static final String C_COLUMNA_TELEFONE = "hip_telefone";
 
     //ARRAY DE CAMPOS PARA AS CONSULTAS
     private String[] campos = new String[]{
@@ -27,7 +29,9 @@ public class HipotecaDBAdapter {
             C_COLUMNA_NOME,
             C_COLUMNA_CONDICOES,
             C_COLUMNA_CONTATO,
-            C_COLUMNA_EMAIL
+            C_COLUMNA_EMAIL,
+            C_COLUMNA_OBSERVACOES,
+            C_COLUMNA_TELEFONE
     };
 
     private Context context;

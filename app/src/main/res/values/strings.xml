@@ -8,5 +8,6 @@
     <string name="label_email">Email</string>
     <string name="label_observacoes">Observacoes</string>
     <string name="label_contrato">Contato</string>
+    <string name="label_observaciones">Observações</string>
 
 </resources>

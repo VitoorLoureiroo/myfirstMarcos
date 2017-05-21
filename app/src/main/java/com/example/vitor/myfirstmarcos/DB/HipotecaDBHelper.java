@@ -12,7 +12,7 @@ import android.util.Log;
 
 public class HipotecaDBHelper extends SQLiteOpenHelper {
 
-    private static int version = 1;
+    private static int version = 2;
     private static String name = "HipotecaDb";
     private static CursorFactory factory = null;
 
@@ -29,7 +29,9 @@ public class HipotecaDBHelper extends SQLiteOpenHelper {
                 " hip_nome TEXT NOT NULL, " +
                 " hip_condicoes TEXT, " +
                 " hip_contato TEXT," +
-                " hip_email TEXT)");
+                " hip_email TEXT, " +
+                " hip_observacoes TEXT," +
+                " hip_telefone TEXT)" );
 
         db.execSQL("CREATE UNIQUE INDEX hip_nome ON HIPOTECA(hip_nome ASC)");
 

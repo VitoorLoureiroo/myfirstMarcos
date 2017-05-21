@@ -26,6 +26,7 @@ public class HipotecaFormulario extends Activity {
     private EditText contato;
     private EditText telefone;
     private EditText email;
+    private EditText observacoes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -43,6 +44,7 @@ public class HipotecaFormulario extends Activity {
         contato = (EditText)findViewById(R.id.contato);
         telefone = (EditText)findViewById(R.id.telefone);
         email = (EditText)findViewById(R.id.email);
+        observacoes = (EditText)findViewById(R.id.observacoes);
 
         dbAdapter = new HipotecaDBAdapter(this);
         dbAdapter.abrir();
@@ -72,8 +74,9 @@ public class HipotecaFormulario extends Activity {
         nome.setText(cursor.getString(cursor.getColumnIndex(HipotecaDBAdapter.C_COLUMNA_NOME)));
         condicoes.setText(cursor.getString(cursor.getColumnIndex(HipotecaDBAdapter.C_COLUMNA_CONDICOES)));
         contato.setText(cursor.getString(cursor.getColumnIndex(HipotecaDBAdapter.C_COLUMNA_CONTATO)));
-        telefone.setText(cursor.getString(cursor.getColumnIndex(HipotecaDBAdapter.C_COLUMNA_CONTATO)));
+        telefone.setText(cursor.getString(cursor.getColumnIndex(HipotecaDBAdapter.C_COLUMNA_TELEFONE)));
         email.setText(cursor.getString(cursor.getColumnIndex(HipotecaDBAdapter.C_COLUMNA_EMAIL)));
+        observacoes.setText(cursor.getString(cursor.getColumnIndex(HipotecaDBAdapter.C_COLUMNA_OBSERVACOES)));
 
     }
 
@@ -83,6 +86,7 @@ public class HipotecaFormulario extends Activity {
         contato.setEnabled(option);
         telefone.setEnabled(option);
         email.setEnabled(option);
+        observacoes.setEnabled(option);
     }
 
 }
