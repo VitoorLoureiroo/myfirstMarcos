@@ -12,7 +12,7 @@ import android.util.Log;
 
 public class HipotecaDBHelper extends SQLiteOpenHelper {
 
-    private static int version = 1;
+    private static int version = 2;
     private static String name = "HipotecaDb";
     private static CursorFactory factory = null;
 

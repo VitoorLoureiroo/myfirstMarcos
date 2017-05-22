@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
@@ -14,6 +15,7 @@ public class MainActivity extends ListActivity {
 
     public static final String C_MODO = "modo";
     public static final int C_VISUALIZAR = 551;
+    public static final int C_CREAR = 552;
 
     private HipotecaDBAdapter dbAdapter;
     private Cursor cursor;
@@ -50,7 +52,7 @@ public class MainActivity extends ListActivity {
 
     }
 
-    private void visualizar(long id){
+    private void visualizar(long id) {
 
         Intent i = new Intent(MainActivity.this, HipotecaFormulario.class);
         i.putExtra(C_MODO, C_VISUALIZAR);
@@ -59,9 +61,38 @@ public class MainActivity extends ListActivity {
     }
 
     @Override
-    protected void onListItemClick(ListView l, View v, int position, long id){
+    protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
         visualizar(id);
+    }
+
+    @Override
+    public boolean onMenuItemSelected(int featureId, MenuItem item) {
+        Intent i;
+        switch (item.getItemId()) {
+            case R.id.menu_crear:
+                i = new Intent(MainActivity.this, HipotecaFormulario.class);
+                i.putExtra(C_MODO, C_CREAR);
+                startActivityForResult(i, C_CREAR);
+                return true;
+        }
+        return super.onMenuItemSelected(featureId, item);
+
+    }
+
+    @Override
+    protected void onActivityResult (int requestCode, int resultCode, Intent data){
+        //nos asseguramos que é a solicitacao que foi feita
+        switch(requestCode)
+        {
+            case C_CREAR:
+                if (resultCode == RESULT_OK)
+                    consultar();
+
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
+        }
+
     }
 
 

@@ -1,10 +1,14 @@
 package com.example.vitor.myfirstmarcos.DB;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.vitor.myfirstmarcos.R;
 
@@ -28,6 +32,9 @@ public class HipotecaFormulario extends Activity {
     private EditText email;
     private EditText observacoes;
 
+    private Button button_salvar;
+    private Button button_cancelar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -46,6 +53,9 @@ public class HipotecaFormulario extends Activity {
         email = (EditText)findViewById(R.id.email);
         observacoes = (EditText)findViewById(R.id.observacoes);
 
+        button_salvar = (Button)findViewById(R.id.button_salvar);
+        button_cancelar = (Button)findViewById(R.id.button_cancelar);
+
         dbAdapter = new HipotecaDBAdapter(this);
         dbAdapter.abrir();
 
@@ -57,6 +67,24 @@ public class HipotecaFormulario extends Activity {
 
         //estabelecer modo do forumlario
         estabelecerModo(extra.getInt(MainActivity.C_MODO));
+
+        //definir acoes p os botoes
+        button_salvar.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                salvar();
+            }
+        });
+
+        button_cancelar.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v)
+            {
+                cancelar();
+            }
+
+        });
+
     }
 
     private void estabelecerModo(int m){
@@ -64,6 +92,9 @@ public class HipotecaFormulario extends Activity {
         if (modo == MainActivity.C_VISUALIZAR){
             this.setTitle(nome.getText().toString());
             this.setEdicion(false);
+        } else if (modo == MainActivity.C_CREAR){
+            this.setTitle(R.string.hipoteca_crear_titulo);
+            this.setEdicion(true);
         }
     }
 
@@ -87,6 +118,31 @@ public class HipotecaFormulario extends Activity {
         telefone.setEnabled(option);
         email.setEnabled(option);
         observacoes.setEnabled(option);
+    }
+
+    private void salvar(){
+        ContentValues reg = new ContentValues();
+
+        reg.put(HipotecaDBAdapter.C_COLUMNA_NOME, nome.getText().toString());
+        reg.put(HipotecaDBAdapter.C_COLUMNA_CONDICOES, condicoes.getText().toString());
+        reg.put(HipotecaDBAdapter.C_COLUMNA_CONTATO, contato.getText().toString());
+        reg.put(HipotecaDBAdapter.C_COLUMNA_TELEFONE, telefone.getText().toString());
+        reg.put(HipotecaDBAdapter.C_COLUMNA_EMAIL, email.getText().toString());
+        reg.put(HipotecaDBAdapter.C_COLUMNA_OBSERVACOES, observacoes.getText().toString());
+
+        if (modo == MainActivity.C_CREAR)
+        {
+            dbAdapter.insert(reg);
+            Toast.makeText(HipotecaFormulario.this, R.string.hipoteca_criar_confirmacao, Toast.LENGTH_SHORT).show();
+        }
+
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    private void cancelar(){
+        setResult(RESULT_CANCELED, null);
+        finish();
     }
 
 }

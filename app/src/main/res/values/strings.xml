@@ -1,13 +1,17 @@
 <resources>
     <string name="app_name">MyFirstMarcos</string>
-    <string name="lista_vacia">Lista vacia</string>
+    <string name="lista_vacia">Lista vazia</string>
     <string name="label_nome_hipoteca">Nome hipoteca</string>
-    <string name="label_condicoes">Condicoes</string>
+    <string name="label_condicoes">Condições</string>
     <string name="label_contato">Contato</string>
     <string name="label_telefone">Telefone</string>
     <string name="label_email">Email</string>
-    <string name="label_observacoes">Observacoes</string>
+    <string name="label_observacoes">Observações</string>
     <string name="label_contrato">Contato</string>
-    <string name="label_observaciones">Observações</string>
+    <string name="menu_crear">Criar</string>
+    <string name="button_salvar">Salvaar</string>
+    <string name="button_cancelar">Cancelar</string>
+    <string name="hipoteca_crear_titulo">Nova Hipoteca</string>
+    <string name="hipoteca_criar_confirmacao">Hipoteca Criada</string>
 
 </resources>

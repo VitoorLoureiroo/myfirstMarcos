@@ -1,5 +1,6 @@
 package com.example.vitor.myfirstmarcos.DB;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -65,5 +66,14 @@ public class HipotecaDBAdapter {
             c.moveToFirst();
         }
         return c;
+    }
+
+    //insere na tabela
+    public long insert(ContentValues reg)
+    {
+        if (db == null)
+            abrir();
+            return  db.insert(C_TABLA, null, reg);
+
     }
 }
