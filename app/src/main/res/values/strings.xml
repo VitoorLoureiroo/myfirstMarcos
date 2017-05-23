@@ -13,5 +13,14 @@
     <string name="button_cancelar">Cancelar</string>
     <string name="hipoteca_crear_titulo">Nova Hipoteca</string>
     <string name="hipoteca_criar_confirmacao">Hipoteca Criada</string>
+    <string name="menu_eliminar">Eliminar</string>
+    <string name="menu_guardar">Salvar</string>
+    <string name="menu_cancelar">Cancelar</string>
+    <string name="hipoteca_eliminar_titulo">Eliminar hipoteca</string>
+    <string name="hipoteca_eliminar_mensagem">Deseja mesmo eliminar?</string>
+    <string name="hipoteca_eliminar_confirmacao">Hipoteca eliminada!</string>
+    <string name="hipoteca_editar_titulo">Editar hipoteca</string>
+    <string name="hipoteca_editar_confirmacao">Hipoteca modificada!</string>
+    <string name="menu_editar">Editar</string>
 
 </resources>

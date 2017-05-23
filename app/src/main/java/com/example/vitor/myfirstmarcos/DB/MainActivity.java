@@ -16,6 +16,7 @@ public class MainActivity extends ListActivity {
     public static final String C_MODO = "modo";
     public static final int C_VISUALIZAR = 551;
     public static final int C_CREAR = 552;
+    public static final int C_EDITAR = 553;
 
     private HipotecaDBAdapter dbAdapter;
     private Cursor cursor;
@@ -86,6 +87,10 @@ public class MainActivity extends ListActivity {
         switch(requestCode)
         {
             case C_CREAR:
+                if (resultCode == RESULT_OK)
+                    consultar();
+
+            case C_VISUALIZAR:
                 if (resultCode == RESULT_OK)
                     consultar();
 

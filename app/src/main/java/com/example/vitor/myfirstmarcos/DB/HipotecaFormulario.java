@@ -1,10 +1,15 @@
 package com.example.vitor.myfirstmarcos.DB;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -95,6 +100,9 @@ public class HipotecaFormulario extends Activity {
         } else if (modo == MainActivity.C_CREAR){
             this.setTitle(R.string.hipoteca_crear_titulo);
             this.setEdicion(true);
+        } else if (modo == MainActivity.C_EDITAR){
+            this.setTitle(R.string.hipoteca_editar_titulo);
+            this.setEdicion(true);
         }
     }
 
@@ -123,6 +131,9 @@ public class HipotecaFormulario extends Activity {
     private void salvar(){
         ContentValues reg = new ContentValues();
 
+        if (modo == MainActivity.C_EDITAR)
+            reg.put(HipotecaDBAdapter.C_COLUMNA_ID, id);
+
         reg.put(HipotecaDBAdapter.C_COLUMNA_NOME, nome.getText().toString());
         reg.put(HipotecaDBAdapter.C_COLUMNA_CONDICOES, condicoes.getText().toString());
         reg.put(HipotecaDBAdapter.C_COLUMNA_CONTATO, contato.getText().toString());
@@ -134,6 +145,10 @@ public class HipotecaFormulario extends Activity {
         {
             dbAdapter.insert(reg);
             Toast.makeText(HipotecaFormulario.this, R.string.hipoteca_criar_confirmacao, Toast.LENGTH_SHORT).show();
+        } else if (modo == MainActivity.C_EDITAR)
+        {
+            Toast.makeText(HipotecaFormulario.this, R.string.hipoteca_editar_confirmacao, Toast.LENGTH_LONG).show();
+            dbAdapter.update(reg);
         }
 
         setResult(RESULT_OK);
@@ -145,4 +160,60 @@ public class HipotecaFormulario extends Activity {
         finish();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        menu.clear();
+        if (modo == MainActivity.C_VISUALIZAR)
+            getMenuInflater().inflate(R.menu.menu_hipoteca_formulario_ver, menu);
+        else
+            getMenuInflater().inflate(R.menu.menu_hipoteca_formulario_editar, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onMenuItemSelected(int featureId, MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.menu_eliminar:
+                apagar(id);
+                return true;
+
+            case R.id.menu_cancelar:
+                cancelar();
+                return true;
+
+            case R.id.menu_guardar:
+                salvar();
+                return true;
+
+            case R.id.menu_editar:
+                estabelecerModo(MainActivity.C_EDITAR);
+                return true;
+        }
+        return super.onMenuItemSelected(featureId, item);
+    }
+
+    private void apagar(final long id){
+
+        AlertDialog.Builder dialogEliminar = new AlertDialog.Builder(this);
+
+        dialogEliminar.setIcon(android.R.drawable.ic_dialog_alert);
+        dialogEliminar.setTitle(getResources().getString(R.string.hipoteca_eliminar_titulo));
+        dialogEliminar.setMessage(getResources().getString(R.string.hipoteca_eliminar_mensagem));
+        dialogEliminar.setCancelable(false);
+
+        dialogEliminar.setPositiveButton(getResources().getString(android.R.string.ok), new DialogInterface.OnClickListener(){
+            public void onClick(DialogInterface dialog, int button){
+                dbAdapter.delete(id);
+                Toast.makeText(HipotecaFormulario.this, R.string.hipoteca_eliminar_confirmacao, Toast.LENGTH_SHORT).show();
+
+                setResult(RESULT_OK);
+                finish();
+            }
+
+        });
+        dialogEliminar.setNegativeButton(android.R.string.no, null);
+        dialogEliminar.show();
+    }
 }

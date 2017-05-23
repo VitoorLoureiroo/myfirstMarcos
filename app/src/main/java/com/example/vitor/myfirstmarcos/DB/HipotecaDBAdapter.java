@@ -76,4 +76,30 @@ public class HipotecaDBAdapter {
             return  db.insert(C_TABLA, null, reg);
 
     }
+
+    public long delete(long id){
+        if (db == null)
+            abrir();
+        return db.delete(C_TABLA, "_id=" + id, null);
+
+    }
+
+    public long update(ContentValues reg){
+        long result = 0;
+        if (db == null)
+            abrir();
+
+        if (reg.containsKey(C_COLUMNA_ID))
+        {
+            long id = reg.getAsLong(C_COLUMNA_ID);
+            reg.remove(C_COLUMNA_ID);
+
+            result = db.update(C_TABLA, reg, "_id = " + id , null);
+        }
+        return result;
+    }
+
+    //...
+
+
 }
